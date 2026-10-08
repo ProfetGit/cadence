@@ -1,0 +1,17 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [{"Name": "Cadence contributors"}],
+        "Category": "Multimedia",
+        "Description": "Now playing card for the Cadence YouTube Music player, with cover art, seek bar and controls.",
+        "FormFactors": ["desktop", "tablet", "handset", "mediacenter"],
+        "Icon": "cadence",
+        "Id": "org.cadence.nowplaying",
+        "License": "GPL-3.0-or-later",
+        "Name": "Cadence Now Playing",
+        "Version": "1.0"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-API": "declarativeappletscript",
+    "X-Plasma-MainScript": "ui/main.qml"
+}

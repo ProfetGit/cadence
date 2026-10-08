@@ -1,0 +1,34 @@
+[Desktop Entry]
+Type=Application
+Name=Cadence
+GenericName=Music Player
+Comment=YouTube Music for Linux
+Exec=cadence %U
+Icon=cadence
+Terminal=false
+StartupNotify=false
+StartupWMClass=cadence
+Categories=AudioVideo;Audio;Player;Music;
+Keywords=youtube;music;player;mpris;songs;lyrics;
+SingleMainWindow=true
+Actions=PlayPause;Next;Previous;Mini;
+
+[Desktop Action PlayPause]
+Name=Play / Pause
+Exec=cadence ctl toggle
+Icon=media-playback-start
+
+[Desktop Action Next]
+Name=Next Track
+Exec=cadence ctl next
+Icon=media-skip-forward
+
+[Desktop Action Previous]
+Name=Previous Track
+Exec=cadence ctl prev
+Icon=media-skip-backward
+
+[Desktop Action Mini]
+Name=Mini Player
+Exec=cadence ctl mini
+Icon=window-pip-enter
