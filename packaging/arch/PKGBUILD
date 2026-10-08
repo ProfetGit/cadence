@@ -13,7 +13,7 @@ makedepends=(python-build python-installer python-setuptools python-wheel)
 optdepends=('plasma-workspace: Plasma widget and the KWin always-on-top pin for the mini player'
             'kdeconnect: control playback from your phone through MPRIS')
 source=("$_pkg-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
-sha256sums=('SKIP')
+sha256sums=('8f67d1b46240b53621326029cb6d69b5e04916f54e7c2188e3858020183ce35a')
 
 build() {
   cd "$_pkg-$pkgver"
