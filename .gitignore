@@ -3,3 +3,8 @@ __pycache__/
 .venv/
 *.egg-info/
 .pytest_cache/
+.flatpak-builder/
+.flatpak-work/
+dist/
+build/
+*.egg-info/

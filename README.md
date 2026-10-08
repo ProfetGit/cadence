@@ -56,6 +56,28 @@ is the stock player, so it keeps working the way your browser does.
 
 ## Install
 
+Grab a package from the [latest release](https://github.com/ProfetGit/cadence/releases/latest), or build from source.
+
+| Format | How | Notes |
+|---|---|---|
+| **Flatpak** | `flatpak install --user io.github.ProfetGit.Cadence.flatpak` | Sandboxed, ~100 MB. Pulls the KDE 6.11 runtime from Flathub if you don't have it. Run with `flatpak run io.github.ProfetGit.Cadence`; the CLI is `flatpak run io.github.ProfetGit.Cadence ctl ...`. |
+| **Arch / CachyOS / Manjaro** | `sudo pacman -U cadence-music-*-any.pkg.tar.zst` | Or build the [`PKGBUILD`](packaging/arch/PKGBUILD) yourself. Installs the `cadence-music` command (see the note below). |
+| **Debian / Ubuntu** | `sudo apt install ./cadence-music_*_all.deb` | Pure Python package. **Untested** on Debian and Ubuntu: it was only built here, not installed. |
+| **pip / pipx** | `pipx install --system-site-packages cadence_music-*.whl` | Needs PyGObject from your distribution (`python3-gi`) so `pip` doesn't have to compile it. |
+| **Source tarball** | `tar xf cadence-*.tar.gz && cd cadence-* && ./install.sh` | Installs under `~/.local` only; no root. `./install.sh --uninstall` removes it. |
+
+Every file has a checksum in `SHA256SUMS`.
+
+Not provided: **AppImage** (bundling Python, Qt and QtWebEngine would be a 300 MB+ image that I could not
+verify), **RPM** and **Snap**. Pull requests are welcome.
+
+> **The command name.** The app is called Cadence and the command is `cadence`, but Arch already ships an unrelated
+> `cadence` (the KXStudio JACK toolbox) at `/usr/bin/cadence`. The distro packages therefore install
+> `cadence-music` instead. `install.sh` and the Flatpak keep `cadence`. Everywhere below, read `cadence` as
+> whichever your install provides.
+
+### From source
+
 Requirements: Python 3.10+, Qt 6 with WebEngine, PyGObject (for D-Bus). KDE Plasma 6 on Wayland is what Cadence
 is developed and tested on; the KWin pin and the Plasma widget are Plasma specific, everything else is plain Qt
 and D-Bus.
@@ -71,7 +93,7 @@ cd cadence
 
 Other distributions: install the equivalents (`PyQt6`, `PyQt6-WebEngine`, `PyGObject`) from your package manager
 or `pip`, then run `./install.sh`. It only writes under `~/.local` (launcher, desktop entry, icon and the
-Plasma widget) and never needs root. Remove it again with `./install.sh --uninstall`.
+Plasma widget) and never needs root.
 
 Start it from your application menu, or run `cadence`. Sign in with your Google account from YouTube Music's
 own account button the first time.
@@ -133,7 +155,8 @@ python3 tests/smoke.py        # headless: settings, player model, JS bridge agai
 python3 tests/test_mpris.py   # MPRIS service over the session bus
 ```
 
-`tools/make_banner.py` renders the animated banner (a seamless 3 s loop at exactly 60 fps) and
+`packaging/build-all.sh` builds every release artifact into `dist/` (tarball, wheel, Arch package, `.deb`, Flatpak
+bundle), `tools/make_banner.py` renders the animated banner (a seamless 3 s loop at exactly 60 fps) and
 `tools/screenshots.py` renders the screenshots above from the real UI with synthetic demo state, so no account
 or audio is involved. Set `CADENCE_HOME` to a throwaway folder to run a development instance with its own
 profile, and `--debug` to enable the `Eval` / `Screenshot` D-Bus calls.

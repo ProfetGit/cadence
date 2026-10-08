@@ -21,7 +21,7 @@ rm -rf "$work"
 packaging/debian/build-deb.sh "$dist" >/dev/null
 
 if command -v flatpak >/dev/null 2>&1 && flatpak info org.flatpak.Builder >/dev/null 2>&1; then
-  b="$(mktemp -d)"
+  b="$here/.flatpak-work"; rm -rf "$b"; mkdir -p "$b"
   flatpak run org.flatpak.Builder --user --force-clean --disable-rofiles-fuse --repo="$b/repo" "$b/build" \
     packaging/flatpak/io.github.ProfetGit.Cadence.yml
   flatpak build-bundle "$b/repo" "$dist/io.github.ProfetGit.Cadence.flatpak" io.github.ProfetGit.Cadence

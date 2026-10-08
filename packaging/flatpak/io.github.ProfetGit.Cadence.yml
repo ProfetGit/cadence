@@ -17,6 +17,9 @@ finish-args:
   - --device=dri
   # QtWebEngine's own sandbox cannot nest inside Flatpak's.
   - --env=QTWEBENGINE_DISABLE_SANDBOX=1
+  - --env=QTWEBENGINEPROCESS_PATH=/app/bin/QtWebEngineProcess
+  - --env=QTWEBENGINE_RESOURCES_PATH=/app/resources
+  - --env=QTWEBENGINE_LOCALES_PATH=/app/translations/qtwebengine_locales
   - --env=CADENCE_DESKTOP_ID=io.github.ProfetGit.Cadence
   # MPRIS, the control service used by `cadence ctl`, notifications and the tray icon.
   - --own-name=org.mpris.MediaPlayer2.cadence
