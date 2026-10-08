@@ -2,7 +2,7 @@ import logging
 
 from PyQt6.QtCore import QObject
 
-from . import APP_ID, APP_NAME, gdbus
+from . import APP_NAME, DESKTOP_ID, gdbus
 from .gdbus import Gio, GLib, Variant
 
 log = logging.getLogger("cadence.notify")
@@ -36,7 +36,7 @@ class Notifier(QObject):
         body = artist if not album else "%s — %s" % (artist, album)
         log.info("notification: %s / %s", title, body)
         hints = {
-            "desktop-entry": Variant("s", APP_ID),
+            "desktop-entry": Variant("s", DESKTOP_ID),
             "transient": Variant("b", True),
             "urgency": Variant("y", 0),
             "category": Variant("s", "x-kde.music"),
@@ -45,7 +45,7 @@ class Notifier(QObject):
             hints["image-path"] = Variant("s", image_path)
         args = Variant(
             "(susssasa{sv}i)",
-            (APP_NAME, self._last_id, APP_ID, title, body, ["prev", "Previous", "next", "Next"], hints, 4000),
+            (APP_NAME, self._last_id, DESKTOP_ID, title, body, ["prev", "Previous", "next", "Next"], hints, 4000),
         )
         try:
             self._bus().call(

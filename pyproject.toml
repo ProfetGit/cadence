@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cadence-music"
+dynamic = ["version"]
+description = "A native-feeling YouTube Music player for Linux: MPRIS, synced lyrics, mini player, tray and a Plasma widget."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = ["PyQt6>=6.6", "PyQt6-WebEngine>=6.6", "PyGObject>=3.42"]
+keywords = ["youtube-music", "music-player", "mpris", "qt6", "kde-plasma", "wayland", "lyrics"]
+classifiers = [
+    "Environment :: X11 Applications :: Qt",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Topic :: Multimedia :: Sound/Audio :: Players",
+]
+
+[project.urls]
+Homepage = "https://github.com/ProfetGit/cadence"
+Issues = "https://github.com/ProfetGit/cadence/issues"
+
+[project.scripts]
+cadence = "cadence.__main__:main"
+cadence-music = "cadence.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["cadence*"]
+
+[tool.setuptools.package-data]
+cadence = ["js/*.js", "assets/*.svg"]
+
+[tool.setuptools.dynamic]
+version = { attr = "cadence.__version__" }

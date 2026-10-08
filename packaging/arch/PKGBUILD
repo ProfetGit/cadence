@@ -1,0 +1,33 @@
+# Maintainer: ProfetGit
+pkgname=cadence-music
+_pkg=cadence
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="Native-feeling YouTube Music player for Linux (Qt 6, MPRIS, synced lyrics, mini player, Plasma widget)"
+arch=(any)
+url="https://github.com/ProfetGit/cadence"
+license=(MIT)
+# /usr/bin/cadence belongs to the unrelated KXStudio "cadence" package, so this ships /usr/bin/cadence-music.
+depends=(python python-pyqt6 python-pyqt6-webengine python-gobject qt6-webengine)
+makedepends=(python-build python-installer python-setuptools python-wheel)
+optdepends=('plasma-workspace: Plasma widget and the KWin always-on-top pin for the mini player'
+            'kdeconnect: control playback from your phone through MPRIS')
+source=("$_pkg-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('SKIP')
+
+build() {
+  cd "$_pkg-$pkgver"
+  python -m build --wheel --no-isolation
+}
+
+package() {
+  cd "$_pkg-$pkgver"
+  python -m installer --destdir="$pkgdir" dist/*.whl
+  rm -f "$pkgdir/usr/bin/cadence"
+  sed 's/^Exec=cadence /Exec=cadence-music /' data/cadence.desktop > cadence.desktop
+  install -Dm644 cadence.desktop "$pkgdir/usr/share/applications/cadence.desktop"
+  install -Dm644 data/cadence.svg "$pkgdir/usr/share/icons/hicolor/scalable/apps/cadence.svg"
+  install -d "$pkgdir/usr/share/plasma/plasmoids"
+  cp -r plasmoid/org.cadence.nowplaying "$pkgdir/usr/share/plasma/plasmoids/"
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}

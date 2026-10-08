@@ -4,7 +4,7 @@ import re
 
 from PyQt6.QtCore import QObject, QTimer
 
-from . import APP_ID, APP_NAME, gdbus
+from . import APP_ID, APP_NAME, DESKTOP_ID, gdbus
 from .gdbus import Variant
 from .player import Player
 
@@ -195,7 +195,7 @@ class Mpris(QObject):
                 "CanRaise": Variant("b", True),
                 "HasTrackList": Variant("b", False),
                 "Identity": Variant("s", APP_NAME),
-                "DesktopEntry": Variant("s", APP_ID),
+                "DesktopEntry": Variant("s", DESKTOP_ID),
                 "SupportedUriSchemes": Variant("as", ["https"]),
                 "SupportedMimeTypes": Variant("as", []),
             }[prop]

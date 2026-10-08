@@ -1,0 +1,8 @@
+include LICENSE README.md
+recursive-include data *
+recursive-include plasmoid *
+recursive-include packaging *
+recursive-include docs *
+recursive-include tests *.py
+recursive-include tools *.py
+include install.sh

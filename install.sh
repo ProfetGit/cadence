@@ -8,7 +8,7 @@ icons="$HOME/.local/share/icons/hicolor/scalable/apps"
 plasmoid="$HOME/.local/share/plasma/plasmoids/org.cadence.nowplaying"
 
 if [ "$1" = "--uninstall" ]; then
-  rm -f "$bin/cadence" "$apps/cadence.desktop" "$icons/cadence.svg" "$HOME/.config/autostart/cadence.desktop"
+  rm -f "$bin/cadence" "$bin/cadence-music" "$apps/cadence.desktop" "$icons/cadence.svg" "$HOME/.config/autostart/cadence.desktop"
   rm -rf "$plasmoid"
   update-desktop-database "$apps" 2>/dev/null || true
   gtk-update-icon-cache -q "$HOME/.local/share/icons/hicolor" 2>/dev/null || true
@@ -22,6 +22,7 @@ cat > "$bin/cadence" <<LAUNCH
 exec env PYTHONPATH="$here\${PYTHONPATH:+:\$PYTHONPATH}" python3 -m cadence "\$@"
 LAUNCH
 chmod +x "$bin/cadence"
+cp "$bin/cadence" "$bin/cadence-music"
 cp "$here/data/cadence.desktop" "$apps/cadence.desktop"
 cp "$here/data/cadence.svg" "$icons/cadence.svg"
 rm -rf "$plasmoid"

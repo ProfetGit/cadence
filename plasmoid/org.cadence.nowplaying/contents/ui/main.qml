@@ -63,7 +63,7 @@ PlasmoidItem {
         Layout.minimumWidth: row.implicitWidth + Kirigami.Units.largeSpacing
         acceptedButtons: Qt.LeftButton | Qt.MiddleButton
         onClicked: (m) => {
-            if (!root.active) launcher.run("cadence")
+            if (!root.active) launcher.run("sh -c 'cadence-music || cadence'")
             else if (m.button === Qt.MiddleButton) root.player.PlayPause()
             else root.expanded = !root.expanded
         }
@@ -167,7 +167,7 @@ PlasmoidItem {
             visible: !root.active
             Kirigami.Icon { source: "cadence"; Layout.alignment: Qt.AlignHCenter; Layout.preferredWidth: Kirigami.Units.iconSizes.huge; Layout.preferredHeight: Layout.preferredWidth }
             PC3.Label { text: "Cadence isn't running"; Layout.alignment: Qt.AlignHCenter; opacity: 0.7 }
-            PC3.Button { text: "Start Cadence"; icon.name: "media-playback-start"; Layout.alignment: Qt.AlignHCenter; onClicked: launcher.run("cadence --hidden") }
+            PC3.Button { text: "Start Cadence"; icon.name: "media-playback-start"; Layout.alignment: Qt.AlignHCenter; onClicked: launcher.run("sh -c 'cadence-music --hidden || cadence --hidden'") }
         }
     }
 }

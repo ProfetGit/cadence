@@ -2,7 +2,7 @@ import argparse
 import os
 import sys
 
-from . import APP_NAME, BUS_NAME, BUS_PATH, __version__
+from . import APP_NAME, DESKTOP_ID, BUS_NAME, BUS_PATH, __version__
 
 CTL_COMMANDS = (
     "play pause toggle stop next prev like dislike shuffle repeat mute volume seek show hide window mini maximize "
@@ -86,7 +86,7 @@ def main(argv=None):
     app.setApplicationName(APP_NAME)
     app.setApplicationDisplayName(APP_NAME)
     app.setApplicationVersion(__version__)
-    app.setDesktopFileName("cadence")
+    app.setDesktopFileName(DESKTOP_ID)
     app.setQuitOnLastWindowClosed(False)
 
     from .app import CadenceApp

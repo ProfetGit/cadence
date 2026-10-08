@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.ProfetGit.Cadence</id>
+  <name>Cadence</name>
+  <summary>A native-feeling YouTube Music player</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <developer_name>ProfetGit</developer_name>
+  <description>
+    <p>Cadence wraps the real YouTube Music player in a native Qt shell. You keep your account, library and recommendations, and get MPRIS media controls, a tray icon, spring-animated synced lyrics, a mini player and a Plasma widget.</p>
+    <ul>
+      <li>Native player bar and a slim custom title bar</li>
+      <li>Synced lyrics with a karaoke-style sweep and per-song timing nudge</li>
+      <li>Mini player with lyrics, sleep timer and ListenBrainz scrobbling</li>
+      <li>Scriptable from the command line and through D-Bus</li>
+    </ul>
+    <p>Cadence is an independent project and is not affiliated with Google or YouTube.</p>
+  </description>
+  <launchable type="desktop-id">io.github.ProfetGit.Cadence.desktop</launchable>
+  <url type="homepage">https://github.com/ProfetGit/cadence</url>
+  <url type="bugtracker">https://github.com/ProfetGit/cadence/issues</url>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/ProfetGit/cadence/main/docs/main.png</image>
+      <caption>Main window with the synced lyrics panel</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/ProfetGit/cadence/main/docs/mini.png</image>
+      <caption>Mini player with lyrics</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>AudioVideo</category>
+    <category>Audio</category>
+    <category>Player</category>
+  </categories>
+  <content_rating type="oars-1.1"/>
+  <provides>
+    <binary>cadence</binary>
+  </provides>
+  <releases>
+    <release version="1.0.0" date="2026-10-08"/>
+  </releases>
+</component>

@@ -1,0 +1,53 @@
+app-id: io.github.ProfetGit.Cadence
+runtime: org.kde.Platform
+runtime-version: '6.11'
+sdk: org.kde.Sdk
+base: com.riverbankcomputing.PyQt.BaseApp
+base-version: '6.11'
+command: cadence
+cleanup-commands:
+  - /app/cleanup-BaseApp.sh
+
+finish-args:
+  - --share=ipc
+  - --share=network
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --socket=pulseaudio
+  - --device=dri
+  # QtWebEngine's own sandbox cannot nest inside Flatpak's.
+  - --env=QTWEBENGINE_DISABLE_SANDBOX=1
+  - --env=CADENCE_DESKTOP_ID=io.github.ProfetGit.Cadence
+  # MPRIS, the control service used by `cadence ctl`, notifications and the tray icon.
+  - --own-name=org.mpris.MediaPlayer2.cadence
+  - --own-name=org.cadence.Cadence
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --talk-name=org.kde.KWin
+  # now-playing.json / cover.jpg for widgets, bars and the Plasma widget
+  - --filesystem=xdg-run/cadence:create
+
+modules:
+  - name: pygobject
+    buildsystem: simple
+    build-options:
+      build-args:
+        - --share=network
+    build-commands:
+      - pip3 install --prefix=/app pycairo pygobject
+
+  - name: cadence
+    buildsystem: simple
+    build-options:
+      build-args:
+        - --share=network
+    build-commands:
+      - pip3 install --prefix=/app --no-deps .
+      - install -Dm644 packaging/flatpak/io.github.ProfetGit.Cadence.desktop /app/share/applications/io.github.ProfetGit.Cadence.desktop
+      - install -Dm644 packaging/flatpak/io.github.ProfetGit.Cadence.metainfo.xml /app/share/metainfo/io.github.ProfetGit.Cadence.metainfo.xml
+      - install -Dm644 data/cadence.svg /app/share/icons/hicolor/scalable/apps/io.github.ProfetGit.Cadence.svg
+      - install -Dm644 LICENSE /app/share/licenses/io.github.ProfetGit.Cadence/LICENSE
+    sources:
+      - type: git
+        url: https://github.com/ProfetGit/cadence.git
+        tag: v1.0.0

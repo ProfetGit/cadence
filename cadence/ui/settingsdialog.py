@@ -24,7 +24,7 @@ def set_autostart(on: bool):
             pass
         return
     f.parent.mkdir(parents=True, exist_ok=True)
-    exe = shutil.which("cadence") or str(Path.home() / ".local/bin/cadence")
+    exe = shutil.which("cadence-music") or shutil.which("cadence") or str(Path.home() / ".local/bin/cadence")
     f.write_text(
         "[Desktop Entry]\nType=Application\nName=Cadence\nComment=YouTube Music for Linux\n"
         f"Exec={exe} --hidden\nIcon=cadence\nTerminal=false\nX-GNOME-Autostart-enabled=true\n"

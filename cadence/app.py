@@ -9,7 +9,7 @@ from PyQt6.QtCore import QObject, QTimer, QUrl
 from PyQt6.QtGui import QColor, QDesktopServices, QIcon
 from PyQt6.QtWidgets import QApplication, QMessageBox, QSystemTrayIcon
 
-from . import APP_NAME, YTM_HOME, __version__, paths
+from . import DESKTOP_ID, APP_NAME, YTM_HOME, __version__, paths
 from .art import ArtCache, dominant_color
 from .bridge import Bridge
 from .control import ControlService
@@ -30,7 +30,7 @@ from .ui.widgets import DEFAULT_ACCENT
 from .web import CadencePage, StyleInjector, make_profile
 
 log = logging.getLogger("cadence")
-ICON_SVG = Path(__file__).resolve().parent.parent / "data" / "cadence.svg"
+ICON_SVG = Path(__file__).resolve().parent / "assets" / "cadence.svg"
 
 
 def _log_uncaught(exc_type, exc, tb):
@@ -82,7 +82,7 @@ class CadenceApp(QObject):
         setup_logging(self.debug)
         log.info("Cadence %s starting", __version__)
 
-        self.icon = QIcon.fromTheme("cadence", QIcon(str(ICON_SVG)))
+        self.icon = QIcon.fromTheme(DESKTOP_ID, QIcon(str(ICON_SVG)))
         qapp.setWindowIcon(self.icon)
         self.accent = QColor(DEFAULT_ACCENT)
         self.player = Player(self)

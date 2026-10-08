@@ -2,7 +2,7 @@
 import json
 import logging
 
-from . import APP_ID, gdbus, paths
+from . import DESKTOP_ID, gdbus, paths
 from .gdbus import GLib, Variant
 
 log = logging.getLogger("cadence.kwin")
@@ -25,7 +25,7 @@ def set_keep_above(caption: str, on: bool) -> bool:
     try:
         paths.RUNTIME.mkdir(parents=True, exist_ok=True)
         file.write_text(_TEMPLATE % {
-            "klass": json.dumps(APP_ID), "caption": json.dumps(caption), "on": "true" if on else "false"})
+            "klass": json.dumps(DESKTOP_ID), "caption": json.dumps(caption), "on": "true" if on else "false"})
         conn = gdbus.session_bus()
         for method, args in (
             ("unloadScript", Variant("(s)", (name,))),
